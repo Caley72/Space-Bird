@@ -1,0 +1,32 @@
+_Update1
+Fixing players ability to go off the screen
+Adding moving forwards and backwards
+Add Music
+Add Pause and play
+
+
+_Update2
+Add Health system
+Add multiple asteroid types (with each taking a different amount of live)
+Add health pickups in main game
+
+_Update3
+Add bullets (A specific number)
+Bullet pickups
+Score becomes money
+Shop
+    Max Health upgrade
+    Max Bullet upgrade
+
+_Update4
+Add Settings
+    Music on/off
+    Change from Easy/Normal/Hard/Insane
+
+_Update5
+Money pickups
+Space ship specs
+Shop
+    _Buy new space ships (Very Expensive with increased specs)
+    _Buy coins with real money
+    _Buy startup powerUps
