@@ -44,6 +44,13 @@ class Spaceship:
             self.vel_y = -SPACESHIP_SPEED
         else:
             self.vel_y += GRAVITY
+        
+        # Prevent spaceship from going off-screen
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        elif self.rect.bottom >= HEIGHT:
+            self.rect.bottom = HEIGHT
+        
         self.y += self.vel_y
         self.rect.y = self.y
     
@@ -131,13 +138,83 @@ def game_loop():
     if score > high_score:
         save_high_score(score)
 
-    # Game over screen
+    # Show the Game Over screen
+    game_over_screen(score, high_score)
+
+# Game Over Screen with Restart and Quit Options
+def game_over_screen(score, high_score):
+    screen.fill((0, 0, 0))
     game_over_text = font.render("GAME OVER", True, (255, 0, 0))
     screen.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2 - 30))
+    
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(score_text, (WIDTH // 2 - 50, HEIGHT // 2))
+    
+    high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
+    screen.blit(high_score_text, (WIDTH // 2 - 75, HEIGHT // 2 + 40))
+
+    restart_button = pygame.Rect(WIDTH // 2 - 75, HEIGHT // 2 + 100, 150, 40)
+    quit_button = pygame.Rect(WIDTH // 2 - 75, HEIGHT // 2 + 150, 150, 40)
+    
+    pygame.draw.rect(screen, (0, 255, 0), restart_button)
+    pygame.draw.rect(screen, (255, 0, 0), quit_button)
+
+    restart_text = font.render("Restart", True, (0, 0, 0))
+    quit_text = font.render("Quit", True, (0, 0, 0))
+    
+    screen.blit(restart_text, (WIDTH // 2 - 25, HEIGHT // 2 + 110))
+    screen.blit(quit_text, (WIDTH // 2 - 25, HEIGHT // 2 + 160))
+
     pygame.display.update()
-    time.sleep(2)  # Show game over screen for a moment
+
+    # Handle button clicks
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                if restart_button.collidepoint(pos):
+                    game_loop()  # Restart the game
+                    return
+                elif quit_button.collidepoint(pos):
+                    pygame.quit()  # Quit the game
+                    quit()
+
+# Main Menu
+def main_menu():
+    start_button = pygame.Rect(WIDTH // 2 - 75, HEIGHT // 2, 150, 40)
+    quit_button = pygame.Rect(WIDTH // 2 - 75, HEIGHT // 2 + 50, 150, 40)
+    
+    while True:
+        screen.fill((0, 0, 0))  # Clear screen
+        start_text = font.render("Start Game", True, (255, 255, 255))
+        quit_text = font.render("Quit Game", True, (255, 255, 255))
+        
+        pygame.draw.rect(screen, (0, 255, 0), start_button)
+        pygame.draw.rect(screen, (255, 0, 0), quit_button)
+
+        screen.blit(start_text, (WIDTH // 2 - 45, HEIGHT // 2 + 10))
+        screen.blit(quit_text, (WIDTH // 2 - 45, HEIGHT // 2 + 60))
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                if start_button.collidepoint(pos):
+                    game_loop()  # Start the game
+                    return
+                elif quit_button.collidepoint(pos):
+                    pygame.quit()  # Quit the game
+                    quit()
 
 # Main entry point
 if __name__ == "__main__":
-    game_loop()
+    main_menu()  # Show the main menu when starting the game
     pygame.quit()
