@@ -6,13 +6,14 @@ Add Pause and play
 Add Sprite Buttons
 Save HighScore in Local storage
 
-
 _Update2
 Add Health system
 Add Damage blinks
 Add multiple asteroid types (with each taking a different amount of live)
 Add health pickups in main game
 Change Collision to Mask Image
+
+Make controls for mobile
 
 _Update3
 Add bullets (A specific number)

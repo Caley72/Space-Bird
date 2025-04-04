@@ -9,17 +9,17 @@ pygame.init()
 # Define constants
 WIDTH, HEIGHT = 800, 600
 FPS = 60
-GRAVITY = 0.5
+GRAVITY = 0.4
 SPACESHIP_SPEED = 10
 METEOR_SPEED = 5
-METEOR_FREQUENCY = 25  # Every 25 frames a meteor will appear
+METEOR_FREQUENCY = 30  # Every 25 frames a meteor will appear
 
 # Load fonts
 font = pygame.font.SysFont("Arial", 30)
 
 # Set up display
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Space Dodger - SpaceShip")
+pygame.display.set_caption("Space Bird - SpaceShip")
 
 # Load images (You need to have these images)
 background = pygame.image.load('Images/space.jpg')  # Your space background
